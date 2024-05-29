@@ -50,7 +50,7 @@ public class AiJob {
 	public static void main(String[] args) throws Exception {
 		ParameterTool parameters = ParameterTool.fromArgs(args);
 		// integration key between Aiven for Apache Flink and Aiven for Apache Kafka
-		String serviceCredentials = parameters.getRequired("serviceCredentials");
+		String integrationId = parameters.getRequired("integrationId");
 		// openAIKey
 		String openAIKey = parameters.getRequired("openAIKey");
 
@@ -58,7 +58,7 @@ public class AiJob {
 		final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
 		// access credentials file containing Apache Kafka bootstrap and security info
-		String credentialsFilePath = System.getenv("AVN_CREDENTIALS_DIR") + "/" + serviceCredentials +".json";
+		String credentialsFilePath = System.getenv("AVN_CREDENTIALS_DIR") + "/" + integrationId +".json";
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		try (FileReader reader = new FileReader(credentialsFilePath)) {
